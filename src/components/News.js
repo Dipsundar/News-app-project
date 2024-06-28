@@ -25,8 +25,10 @@ export class News extends Component {
     };
   }
 
+
+
   async updateNews() {
-    const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.catagory}&apiKey=ed54ceb9781f4b268ccd8291827863f2&page=${this.state.page}&pageSize=${this.props.pagesize}`;
+    const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.catagory}&apiKey=5295f10dd2fd4401a0079b10b0d9cef6&page=${this.state.page}&pageSize=${this.props.pagesize}`;
     // let url ="https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=ed54ceb9781f4b268ccd8291827863f2";
     // let url ="https://newsapi.org/v2/everything?q=apple&from=2023-03-06&to=2023-03-06&sortBy=popularity&apiKey=ed54ceb9781f4b268ccd8291827863f2";
     this.setState({ loading: true });
