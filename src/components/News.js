@@ -99,7 +99,7 @@ export class News extends Component {
                 <h1 className='text-dark text-center'>D-NEWS - Top Headlines</h1>
                 {this.state.loading && <Spinner />}
                 <div className="row my-3 d-flex justify-content-evenly">
-                    {!this.state.loading && this.state.articles?.map((element) => {
+                    {!this.state.loading && this.state.articles.?map((element) => {
                         return <div className="col-md-3 mx-1 my-3" key={element.url} >
                             <NewsItem title={element.title ? element.title.slice(0, 46) : ""} description={element.description ? element.description.slice(0, 88) : ""} newsUrl={element.url} imageUrl={element.urlToImage} author={element.author} date={element.publishedAt} source={element.source.name} />
                         </div>
