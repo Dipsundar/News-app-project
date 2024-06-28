@@ -25,28 +25,17 @@ export class News extends Component {
     };
   }
 
-
-
   async updateNews() {
     const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.catagory}&apiKey=5295f10dd2fd4401a0079b10b0d9cef6&page=${this.state.page}&pageSize=${this.props.pagesize}`;
     // let url ="https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=ed54ceb9781f4b268ccd8291827863f2";
     // let url ="https://newsapi.org/v2/everything?q=apple&from=2023-03-06&to=2023-03-06&sortBy=popularity&apiKey=ed54ceb9781f4b268ccd8291827863f2";
-    this.setState({ loading: true });
-    try {
-      let data = await fetch(url);
-      if (!data.ok) {
-        throw new Error(`HTTP error! status: ${data.status}`);
-      }
-      let parseData = await data.json();
-      this.setState({
-        articles: parseData.articles,
-        totalResults: parseData.totalResults,
-        loading: false,
-      });
-    } catch (error) {
-      console.error("Error fetching data: ", error);
-      this.setState({ loading: false });
-    }
+    this.setState({ loading: false });
+    let data = await fetch(url);
+    let parseData = await data.json();
+    this.setState({
+      articles: parseData.articles,
+      totalResults: parseData.totalResults,
+    });
   }
 
   async componentDidMount() {
@@ -116,7 +105,9 @@ export class News extends Component {
                   <NewsItem
                     title={element.title ? element.title.slice(0, 46) : ""}
                     description={
-                      element.description ? element.description.slice(0, 88) : ""
+                      element.description
+                        ? element.description.slice(0, 88)
+                        : ""
                     }
                     newsUrl={element.url}
                     imageUrl={element.urlToImage}
@@ -125,31 +116,6 @@ export class News extends Component {
                     source={element.source.name}
                   />
                 </div>
-              );
-            })}
-        </div>
-        <div className="container d-flex justify-content-between">
-          <button
-            disabled={this.state.page <= 1}
-            type="button"
-            className="btn btn-dark"
-            onClick={this.handlePreviousClick}
-          >
-            &larr; Previous
-          </button>
-          <button
-            disabled={
-              this.state.page + 1 >
-              Math.ceil(this.state.totalResults / this.props.pagesize)
-            }
-            type="button"
-            className="btn btn-dark"
-            onClick={this.handleNextClick}
-          >
-            Next &rarr;
-          </button>
-        </div>
-      </div>
               );
             })}
         </div>
